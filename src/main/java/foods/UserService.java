@@ -1,20 +1,19 @@
 package foods;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserService {
-
-	private UserRepository userRepository;
+	
+	private Long id;
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+	private UserRepository userRepository;
 
 	public User findByEmail(String email) {
-		System.out.println(userRepository.findByEmail(email));
 		return userRepository.findByEmail(email);
 	}
 
@@ -24,6 +23,10 @@ public class UserService {
 	
 	public User findFirst() {
 		return userRepository.findFirst();
+	}
+	
+	public Optional<User> findById(long id) {
+		return userRepository.findById(id);
 	}
 
 }

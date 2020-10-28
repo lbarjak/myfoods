@@ -1,6 +1,7 @@
 package foods;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.var;
 
 @Controller
 @RequestMapping("/")
@@ -46,9 +49,15 @@ public class FoodsController {
 	@GetMapping()
 	public String handleGetQueries(Model model) {
 		model.addAttribute("queries", queries);
-		User user = userService.findFirst();
-		System.out.println(user.toString());
+//		Optional<User> user = userService.findByEmail("barjak.laszlo@google.com");
+//		System.out.println(user.toString());
+		Long id = 1L;
+		Optional<User> user = userService.findById(id);
+        if (user.isPresent()) {
+            System.out.println(user.get());
+        } else {
+            System.out.printf("No user found with id %d%n", id);
+        }
 		return "index";
 	}
-
-}
+}//http://zetcode.com/springboot/findbyid/

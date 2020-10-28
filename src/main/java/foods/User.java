@@ -16,17 +16,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
+@Getter
 @Entity
 @Table(name = "users")
 public class User {
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-				+ ", activation=" + activation + ", enabled=" + enabled + "]";
-	}
+	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private Long id;
 
 	@Column(unique = true, nullable = false)
