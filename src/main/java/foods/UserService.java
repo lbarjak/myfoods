@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	
 	private Long id;
+	private Optional<User> user;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -25,8 +26,14 @@ public class UserService {
 		return userRepository.findFirst();
 	}
 	
-	public Optional<User> findById(long id) {
-		return userRepository.findById(id);
+	public User findById(long id) {
+		user = userRepository.findById(id);
+        if (user.isPresent()) {
+            System.out.println(user.get());
+            return user.get();
+        }
+        System.out.printf("No user found with id %d%n", id);
+		return null;
 	}
-
+	
 }
